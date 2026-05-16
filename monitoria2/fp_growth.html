@@ -490,7 +490,6 @@
                         <span class="item-badge">Leite</span>
                         <span class="item-badge">Manteiga</span>
                         <span class="item-badge">Queijo</span>
-                        <span class="item-badge">Ovos</span>
                     </div>
                     <div class="transaction-box">
                         <strong style="width: 60px;">T5:</strong>
@@ -512,7 +511,6 @@
                         <strong style="width: 60px;">T8:</strong>
                         <span class="item-badge">Pão</span>
                         <span class="item-badge">Leite</span>
-                        <span class="item-badge">Ovos</span>
                         <span class="item-badge">Queijo</span>
                     </div>
                     <div class="transaction-box">
@@ -526,7 +524,6 @@
                         <span class="item-badge">Leite</span>
                         <span class="item-badge">Manteiga</span>
                         <span class="item-badge">Queijo</span>
-                        <span class="item-badge">Ovos</span>
                     </div>
                 </div>
             </div>
@@ -564,16 +561,16 @@
                     </div>
                     <div class="frequency-bar">
                         <div class="freq-label">Ovos</div>
-                        <div class="freq-visual" style="width: 50%;">
-                            <span>5/10 = 50%</span>
+                        <div class="freq-visual" style="width: 20%;">
+                            <span>2/10 = 20%</span>
                         </div>
-                        <div class="freq-count">✅ 5</div>
+                        <div class="freq-count">❌ 2</div>
                     </div>
                 </div>
 
-                <div class="decision-box yes" style="margin-top: 20px;">
-                    <strong>✅ Decisão:</strong> Todos os itens aparecem em pelo menos 30% das transações. 
-                    <strong>Nenhum é descartado!</strong>
+                <div class="decision-box" style="margin-top: 20px;">
+                    <strong>❌ Decisão:</strong> Ovos aparece em apenas 2/10 transações (20%).
+                    <strong>Não atinge o suporte mínimo e é descartado.</strong>
                 </div>
             </div>
 
@@ -581,8 +578,9 @@
                 <h2>📋 Resultado do Passo 1</h2>
                 <div class="info-box success">
                     <strong>Itens frequentes (1-itemsets):</strong><br>
-                    {Pão}, {Leite}, {Manteiga}, {Queijo}, {Ovos}<br><br>
-                    <strong>Ordem para o Passo 2:</strong> Vamos ordená-los do mais frequente (Pão) ao menos frequente (Ovos).
+                    {Pão}, {Leite}, {Manteiga}, {Queijo}<br>
+                    <span class="highlight-red">Ovos descartado (2/10)</span><br><br>
+                    <strong>Ordem para o Passo 2:</strong> Pão, Leite, Manteiga, Queijo.
                 </div>
             </div>
         </div>
@@ -816,6 +814,99 @@
             </div>
 
             <div class="panel full-width">
+                <h2>🔄 Construção Interativa da Mini-Árvore (Queijo)</h2>
+                <div class="info-box">
+                    Usamos as <strong>bases condicionais do Passo 3</strong> e inserimos uma a uma,
+                    exatamente como no Passo 2. Aqui, a ordem segue as frequências <strong>dentro da base do Queijo</strong>.
+                </div>
+                <div style="padding: 15px; text-align: center;">
+                    <button class="btn-secondary" onclick="prevConditional()" style="margin: 10px 5px;">◀ Caminho Anterior</button>
+                    <button class="btn-primary" onclick="nextConditional()" style="margin: 10px 5px;">Próximo Caminho ▶</button>
+                    <button class="btn-secondary" onclick="resetConditional()" style="margin: 10px 5px;">🔄 Recomeçar</button>
+                </div>
+
+                <div id="conditional-step-info" style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin: 15px 0;">
+                    <div id="conditional-current" style="font-size: 14px; font-weight: bold; color: #667eea; margin-bottom: 15px;">
+                        <!-- Preenchido com JavaScript -->
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <strong style="color: #333;">Caminho da base (Passo 3):</strong>
+                            <div id="conditional-original" style="background: white; padding: 10px; border-radius: 4px; border-left: 3px solid #ff6b6b; margin-top: 5px; font-size: 12px;">
+                                <!-- Preenchido com JavaScript -->
+                            </div>
+                        </div>
+                        <div>
+                            <strong style="color: #333;">Após ordenar por frequência na base:</strong>
+                            <div id="conditional-ordered" style="background: white; padding: 10px; border-radius: 4px; border-left: 3px solid #51cf66; margin-top: 5px; font-size: 12px;">
+                                <!-- Preenchido com JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="conditional-steps" style="margin-top: 15px; font-size: 12px;">
+                        <!-- Preenchido com JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel full-width">
+                <h2>🌿 Mini-Árvore em Construção (Queijo)</h2>
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <span id="conditional-counter" style="font-size: 12px; color: #666;">Caminho 0/0</span>
+                </div>
+                <svg id="tree-passo4-step" width="100%" height="400"></svg>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #667eea;"></div>
+                        <span>Nó existente</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #51cf66;"></div>
+                        <span>Nó adicionado neste caminho</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #764ba2;"></div>
+                        <span>Raiz (ponto de partida)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel full-width">
+                <h2>🧩 Como essa mini-árvore foi construída</h2>
+                <div class="info-box">
+                    <strong>Base condicional do Queijo (após remover "Queijo"):</strong><br>
+                    • Pão, Leite (x2)<br>
+                    • Pão, Leite, Manteiga (x1)<br>
+                    • Leite (x1)<br>
+                    • Leite, Manteiga (x1)<br>
+                    • Manteiga (x1)
+                </div>
+                <div class="info-box success">
+                    <strong>Frequências na base:</strong> Leite: 5, Pão: 3, Manteiga: 3<br>
+                    <strong>Ordem usada:</strong> Leite → Pão → Manteiga
+                </div>
+                <div class="info-box">
+                    <strong>Inserindo os caminhos (com contagem):</strong><br>
+                    1) Leite → Pão (x2) cria Leite:2 e Pão:2<br>
+                    2) Leite → Pão → Manteiga (x1) vira Leite:3, Pão:3, Manteiga:1<br>
+                    3) Leite (x1) vira Leite:4<br>
+                    4) Leite → Manteiga (x1) cria Manteiga:1 sob Leite<br>
+                    5) Manteiga (x1) cria Manteiga:1 direto na raiz
+                </div>
+            </div>
+
+            <div class="panel full-width">
+                <h2>🌿 Árvore Condicional do Queijo (visualização)</h2>
+                <div class="info-box">
+                    Esta é a FP-Tree construída <strong>apenas</strong> com a base condicional do Queijo.
+                    As contagens nos nós representam o <strong>prefixo daquele caminho</strong>.
+                </div>
+                <svg id="tree-passo4" width="100%" height="400"></svg>
+            </div>
+
+            <div class="panel full-width">
                 <h2>🎯 Comparação: Árvore Original vs Mini-Árvores</h2>
                 <div class="mini-tree-comparison">
                     <div class="tree-comparison-item">
@@ -827,17 +918,32 @@
                                         <ul>
                                             <li>Leite: 5
                                                 <ul>
-                                                    <li>Manteiga: 3</li>
-                                                    <li>Queijo: 1</li>
-                                                    <li>Ovos: 1</li>
+                                                    <li>Manteiga: 3
+                                                        <ul>
+                                                            <li>Queijo: 1</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Queijo: 2</li>
                                                 </ul>
                                             </li>
                                             <li>Manteiga: 1</li>
-                                            <li>Ovos: 1</li>
                                         </ul>
                                     </li>
-                                    <li>Leite: 2</li>
-                                    <li>Manteiga: 1</li>
+                                    <li>Leite: 2
+                                        <ul>
+                                            <li>Manteiga: 1
+                                                <ul>
+                                                    <li>Queijo: 1</li>
+                                                </ul>
+                                            </li>
+                                            <li>Queijo: 1</li>
+                                        </ul>
+                                    </li>
+                                    <li>Manteiga: 1
+                                        <ul>
+                                            <li>Queijo: 1</li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -884,36 +990,84 @@
             <div class="content full-width">
                 <div class="panel active">
                     <div class="step-indicator">5</div>
-                    <h2>Mineração Recursiva — Divide and Conquer</h2>
+                    <h2>Mineração Recursiva (Dentro da Árvore do Queijo)</h2>
                     <div class="info-box">
-                        <strong>Conceito:</strong> Repetir Passos 3 e 4 recursivamente para cada mini-árvore construída.
+                        <strong>O Segredo do FP-Growth:</strong> A mini-árvore do Queijo gerada no Passo 4 agora é tratada como se fosse a árvore original. 
+                        Vamos aplicar a <strong>mesma regra</strong>: olhar os itens de baixo para cima (menos frequentes primeiro) para descobrir o que vem antes deles.
                     </div>
                     <div class="info-box success">
-                        <strong>✓ Por que recursão?</strong> Cada nível trabalha com uma árvore <strong>muito menor</strong>, 
-                        tornando o processamento exponencialmente mais rápido que Apriori!
+                        <strong>Contexto Atual (Sufixo):</strong> Tudo o que encontrarmos agora será combinado com <strong>{Queijo}</strong>.
                     </div>
                 </div>
             </div>
 
             <div class="panel full-width">
-                <h2>✅ Resultado Final: Todos os Itemsets Frequentes</h2>
+                <h2>🔍 Minerando a Mini-Árvore do Queijo (Ordem: Manteiga → Pão → Leite)</h2>
+                
+                <div style="padding: 15px;">
+                    <div class="step-title" style="color: #e83e8c;">Alvo 1: Manteiga (Sufixo = {Manteiga, Queijo})</div>
+                    <div class="info-box">
+                        Ao olhar para a mini-árvore do Queijo, o que está acima da Manteiga?<br>
+                        • Caminho 1: <code>Leite → Pão</code> (contagem: 1)<br>
+                        • Caminho 2: <code>Leite</code> (contagem: 1)<br>
+                        • Caminho 3: Raiz direta (contagem: 1)
+                    </div>
+                    <div class="decision-box">
+                        <strong>Soma das frequências acima da Manteiga:</strong> Leite (2) e Pão (1).<br>
+                        ❌ Nenhum atinge o <code>min_support = 3</code>. A recursão para a Manteiga morre aqui. Não geramos trios com ela.
+                    </div>
+
+                    <div class="step-title" style="color: #e83e8c; margin-top: 30px;">Alvo 2: Pão (Sufixo = {Pão, Queijo})</div>
+                    <div class="info-box">
+                        Ao olhar para a mini-árvore do Queijo, o que está acima do Pão?<br>
+                        • Único caminho: <code>Leite</code> (contagem do nó Pão: 3)
+                    </div>
+                    <div class="decision-box yes">
+                        <strong>Soma das frequências acima do Pão:</strong> Leite (3).<br>
+                        ✅ O Leite atinge o <code>min_support = 3</code>! Ele sobreviveu.
+                    </div>
+                    
+                    <div class="recursion-level level-2">
+                        <h4>Nasce a Mini-Mini-Árvore de {Pão, Queijo}</h4>
+                        <p style="font-size: 13px; margin: 10px 0;">O sobrevivente "Leite" forma uma nova árvore minúscula: <code>Raiz → Leite:3</code></p>
+                        <div class="info-box success" style="background: #e3fafc; border-left-color: #15aabf;">
+                            <strong>🎉 NOVO ITEMSET GERADO (Tamanho 3):</strong><br>
+                            Juntamos o sobrevivente (Leite) + o Sufixo atual ({Pão, Queijo}):<br>
+                            <strong style="font-size: 16px; color: #0b7285;">{Leite, Pão, Queijo} (Suporte: 3)</strong>
+                        </div>
+                        <p style="font-size: 12px; color: #666;">*Se tentarmos minerar o Leite nesta nova arvorezinha, não há nada acima dele. A recursão fecha com sucesso.</p>
+                    </div>
+
+                    <div class="step-title" style="color: #e83e8c; margin-top: 30px;">Alvo 3: Leite (Sufixo = {Leite, Queijo})</div>
+                    <div class="info-box">
+                        Ao olhar para a mini-árvore do Queijo, o que está acima do Leite?<br>
+                        • <code>Nada</code> (O Leite está conectado direto na Raiz).<br>
+                        A recursão para o Leite acaba imediatamente.
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel full-width">
+                <h2>✅ Fim da Linha: Resumo dos Padrões Extraídos</h2>
                 <div class="conclusion-box">
-                    <strong>🎯 Padrões Frequentes Extraídos pelo FP-Growth:</strong><br><br>
-                    <div style="text-align: left; display: inline-block;">
-                        {Pão}, {Leite}, {Manteiga}, {Queijo}, {Ovos}<br>
-                        {Pão, Leite}, {Pão, Manteiga}, {Leite, Manteiga}, {Leite, Queijo}, {Pão, Ovos}<br>
-                        {Pão, Leite, Manteiga}, {Pão, Leite, Queijo}, {Leite, Manteiga, Queijo}<br>
-                        {Pão, Leite, Manteiga, Queijo}<br>
-                        e mais...
+                    <strong>🎯 O que o FP-Growth descobriu apenas explorando ramos (sem gerar candidatos falsos):</strong><br><br>
+                    <div style="text-align: left; display: inline-block; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <span style="color: #ffd43b;">Tamanho 1 (Passo 1):</span><br>
+                        {Pão: 7}, {Leite: 7}, {Manteiga: 6}, {Queijo: 6}<br><br>
+                        
+                        <span style="color: #ffd43b;">Tamanho 2 (Minerando as Mini-Árvores base):</span><br>
+                        {Pão, Leite: 5}, {Pão, Manteiga: 4}, {Leite, Manteiga: 4},<br>
+                        {Pão, Queijo: 3}, {Leite, Queijo: 5}, {Manteiga, Queijo: 3}<br><br>
+                        
+                        <span style="color: #ffd43b;">Tamanho 3 (Pela Recursão Profunda mostrada acima):</span><br>
+                        {Pão, Leite, Manteiga: 3}, <strong>{Pão, Leite, Queijo: 3}</strong>
                     </div>
                 </div>
 
                 <div class="info-box success" style="margin-top: 20px;">
-                    <strong>⚡ Comparação com Apriori:</strong><br><br>
-                    <strong>Apriori:</strong> Precisa testar <strong>MUITOS</strong> candidatos, 
-                    fazendo múltiplos scans no banco de dados.<br><br>
-                    <strong>FP-Growth:</strong> <strong>Apenas 2 scans totais</strong> + processamento recursivo em memória. 
-                    Muito mais rápido! 🚀
+                    <strong>⚡ Por que isso esmaga o Apriori em performance?</strong><br><br>
+                    Para achar o trio <strong>{Pão, Leite, Queijo}</strong>, o Apriori teria gerado dezenas de combinações inúteis no Nível 2 e Nível 3, indo ao banco de dados repetidas vezes.<br>
+                    O FP-Growth achou o mesmo trio apenas "andando para cima" na memória RAM, dividindo o problema em árvores cada vez menores.
                 </div>
             </div>
         </div>
@@ -928,19 +1082,20 @@
         let currentStep = 0;
         const steps = ['passo1', 'passo2', 'passo3', 'passo4', 'passo5'];
         let currentTransactionStep = 0;
+        let currentConditionalStep = 0;
 
         // Dataset de exemplo
         const dataset = [
             ['Pão', 'Leite', 'Manteiga', 'Ovos'],
             ['Pão', 'Leite', 'Queijo'],
             ['Pão', 'Manteiga'],
-            ['Leite', 'Manteiga', 'Queijo', 'Ovos'],
+            ['Leite', 'Manteiga', 'Queijo'],
             ['Pão', 'Leite', 'Manteiga'],
             ['Pão', 'Ovos'],
             ['Leite', 'Queijo'],
-            ['Pão', 'Leite', 'Ovos', 'Queijo'],
+            ['Pão', 'Leite', 'Queijo'],
             ['Manteiga', 'Queijo'],
-            ['Pão', 'Leite', 'Manteiga', 'Queijo', 'Ovos']
+            ['Pão', 'Leite', 'Manteiga', 'Queijo']
         ];
 
         let frequencies = {
@@ -948,589 +1103,14 @@
             'Leite': 7,
             'Manteiga': 6,
             'Queijo': 6,
-            'Ovos': 5
+            'Ovos': 2
         };
 
         const itemOrder = ['Pão', 'Leite', 'Manteiga', 'Queijo', 'Ovos'];
 
-        // Dados da FP-Tree de exemplo (MESMA do final do Passo 2)
-        let treeData = {
-            name: "",
-            value: 0,
-            children: [
-                {
-                    name: "Pão",
-                    value: 7,
-                    children: [
-                        {
-                            name: "Leite",
-                            value: 5,
-                            children: [
-                                {
-                                    name: "Manteiga",
-                                    value: 3,
-                                    children: [
-                                        { name: "Queijo", value: 1, children: [] },
-                                        { name: "Ovos", value: 1, children: [] }
-                                    ]
-                                },
-                                { name: "Queijo", value: 1, children: [] },
-                                { name: "Ovos", value: 1, children: [] }
-                            ]
-                        },
-                        { name: "Manteiga", value: 1, children: [] },
-                        { name: "Ovos", value: 1, children: [] }
-                    ]
-                },
-                {
-                    name: "Leite",
-                    value: 2,
-                    children: [
-                        {
-                            name: "Queijo",
-                            value: 2,
-                            children: [
-                                { name: "Manteiga", value: 1, children: [] }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    name: "Manteiga",
-                    value: 1,
-                    children: [
-                        { name: "Queijo", value: 1, children: [] }
-                    ]
-                }
-            ]
-        };
-
-        // Construção incremental da árvore para cada transação
-        let treeProgression = [
-            // T0: [Pão, Leite, Manteiga, Ovos] - cria caminho linear
-            {
-                name: "",
-                value: 0,
-                newNodes: ['Pão', 'Leite', 'Manteiga', 'Ovos'],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 1,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 1,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 1,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            // T1: [Pão, Leite, Queijo] - compartilha Pão→Leite, novo ramo Queijo
-            {
-                name: "",
-                value: 0,
-                newNodes: ['Queijo'],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 2,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 2,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 1,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    },
-                                    { name: "Queijo", value: 1, children: [] }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            // T2: [Pão, Manteiga] - compartilha Pão, novo ramo direto para Manteiga
-            {
-                name: "",
-                value: 0,
-                newNodes: [],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 3,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 2,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 1,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    },
-                                    { name: "Queijo", value: 1, children: [] }
-                                ]
-                            },
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            // T3: [Leite, Manteiga, Queijo, Ovos] - novo ramo começando com Leite
-            {
-                name: "",
-                value: 0,
-                newNodes: ['Leite (novo)', 'Manteiga (novo)', 'Queijo (novo)', 'Ovos (novo)'],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 3,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 2,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 1,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    },
-                                    { name: "Queijo", value: 1, children: [] }
-                                ]
-                            },
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        name: "Leite",
-                        value: 1,
-                        children: [
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: [
-                                    {
-                                        name: "Queijo",
-                                        value: 1,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            // T4: [Pão, Leite, Manteiga] - compartilha Pão→Leite, incrementa Manteiga
-            {
-                name: "",
-                value: 0,
-                newNodes: [],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 4,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 3,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 2,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    },
-                                    { name: "Queijo", value: 1, children: [] }
-                                ]
-                            },
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        name: "Leite",
-                        value: 1,
-                        children: [
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: [
-                                    {
-                                        name: "Queijo",
-                                        value: 1,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            // T5: [Pão, Ovos] - compartilha Pão, novo ramo direto para Ovos
-            {
-                name: "",
-                value: 0,
-                newNodes: [],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 5,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 3,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 2,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    },
-                                    { name: "Queijo", value: 1, children: [] }
-                                ]
-                            },
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: []
-                            },
-                            {
-                                name: "Ovos",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        name: "Leite",
-                        value: 1,
-                        children: [
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: [
-                                    {
-                                        name: "Queijo",
-                                        value: 1,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            // T6: [Leite, Queijo] - incrementa Leite isolado, novo Queijo irmão
-            {
-                name: "",
-                value: 0,
-                newNodes: [],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 5,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 3,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 2,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    },
-                                    { name: "Queijo", value: 1, children: [] }
-                                ]
-                            },
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: []
-                            },
-                            {
-                                name: "Ovos",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        name: "Leite",
-                        value: 2,
-                        children: [
-                            {
-                                name: "Queijo",
-                                value: 1,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 1,
-                                        children: []
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            // T7: [Pão, Leite, Ovos, Queijo] - compartilha Pão→Leite, novo ramo Ovos
-            {
-                name: "",
-                value: 0,
-                newNodes: [],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 6,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 4,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 2,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    },
-                                    {
-                                        name: "Queijo",
-                                        value: 1,
-                                        children: []
-                                    },
-                                    {
-                                        name: "Ovos",
-                                        value: 1,
-                                        children: []
-                                    }
-                                ]
-                            },
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: []
-                            },
-                            {
-                                name: "Ovos",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        name: "Leite",
-                        value: 2,
-                        children: [
-                            {
-                                name: "Queijo",
-                                value: 1,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 1,
-                                        children: []
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            // T8: [Manteiga, Queijo] - novo ramo separado Manteiga→Queijo
-            {
-                name: "",
-                value: 0,
-                newNodes: ['Manteiga (novo)', 'Queijo (novo)'],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 6,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 4,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 2,
-                                        children: [
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    },
-                                    {
-                                        name: "Queijo",
-                                        value: 1,
-                                        children: []
-                                    },
-                                    {
-                                        name: "Ovos",
-                                        value: 1,
-                                        children: []
-                                    }
-                                ]
-                            },
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: []
-                            },
-                            {
-                                name: "Ovos",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        name: "Leite",
-                        value: 2,
-                        children: [
-                            {
-                                name: "Queijo",
-                                value: 1,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 1,
-                                        children: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        name: "Manteiga",
-                        value: 1,
-                        children: [
-                            {
-                                name: "Queijo",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            // T9: [Pão, Leite, Manteiga, Queijo, Ovos] - incrementa frequências
-            {
-                name: "",
-                value: 0,
-                newNodes: [],
-                children: [
-                    {
-                        name: "Pão",
-                        value: 7,
-                        children: [
-                            {
-                                name: "Leite",
-                                value: 5,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 3,
-                                        children: [
-                                            {
-                                                name: "Queijo",
-                                                value: 1,
-                                                children: []
-                                            },
-                                            { name: "Ovos", value: 1, children: [] }
-                                        ]
-                                    },
-                                    {
-                                        name: "Queijo",
-                                        value: 1,
-                                        children: []
-                                    },
-                                    {
-                                        name: "Ovos",
-                                        value: 1,
-                                        children: []
-                                    }
-                                ]
-                            },
-                            {
-                                name: "Manteiga",
-                                value: 1,
-                                children: []
-                            },
-                            {
-                                name: "Ovos",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        name: "Leite",
-                        value: 2,
-                        children: [
-                            {
-                                name: "Queijo",
-                                value: 2,
-                                children: [
-                                    {
-                                        name: "Manteiga",
-                                        value: 1,
-                                        children: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        name: "Manteiga",
-                        value: 1,
-                        children: [
-                            {
-                                name: "Queijo",
-                                value: 1,
-                                children: []
-                            }
-                        ]
-                    }
-                ]
-            }
-        ];
+        // Dados da FP-Tree e progressao sao calculados a partir do dataset
+        let treeData = { name: "", value: 0, children: [] };
+        let treeProgression = [];
 
         const minSupportCount = 3;
         const totalTransactions = dataset.length;
@@ -1542,13 +1122,15 @@
             return acc;
         }, {});
 
-        const sortByFrequency = (items) => {
+        const sortByMap = (items, freqMap) => {
             return items.slice().sort((a, b) => {
-                const diff = frequencies[b] - frequencies[a];
+                const diff = (freqMap[b] || 0) - (freqMap[a] || 0);
                 if (diff !== 0) return diff;
                 return itemOrder.indexOf(a) - itemOrder.indexOf(b);
             });
         };
+
+        const sortByFrequency = (items) => sortByMap(items, frequencies);
 
         const cloneTree = (node) => ({
             name: node.name,
@@ -1587,9 +1169,74 @@
             return { treeData: cloneTree(root), treeProgression: progression };
         }
 
+        function buildTreeProgressionWithFrequencies(transactions, freqMap) {
+            const root = { name: "", value: 0, children: [] };
+            const progression = [];
+
+            transactions.forEach((transaction) => {
+                const ordered = sortByMap(
+                    transaction.filter((item) => (freqMap[item] || 0) >= minSupportCount),
+                    freqMap
+                );
+                const newNodes = [];
+                let current = root;
+
+                ordered.forEach((item) => {
+                    let child = current.children.find((c) => c.name === item);
+                    if (!child) {
+                        child = { name: item, value: 1, children: [] };
+                        current.children.push(child);
+                        newNodes.push(item);
+                    } else {
+                        child.value += 1;
+                    }
+                    current = child;
+                });
+
+                const snapshot = cloneTree(root);
+                snapshot.newNodes = newNodes;
+                progression.push(snapshot);
+            });
+
+            return { treeData: cloneTree(root), treeProgression: progression };
+        }
+
         const computedTree = buildTreeProgression(dataset);
         treeData = computedTree.treeData;
         treeProgression = computedTree.treeProgression;
+
+        const conditionalBaseQueijo = [
+            { path: ['Pão', 'Leite'], count: 2 },
+            { path: ['Pão', 'Leite', 'Manteiga'], count: 1 },
+            { path: ['Leite'], count: 1 },
+            { path: ['Leite', 'Manteiga'], count: 1 },
+            { path: ['Manteiga'], count: 1 }
+        ];
+
+        const expandConditionalBase = (base) => {
+            const expanded = [];
+            base.forEach((entry) => {
+                for (let i = 0; i < entry.count; i += 1) {
+                    expanded.push(entry.path);
+                }
+            });
+            return expanded;
+        };
+
+        const conditionalTransactions = expandConditionalBase(conditionalBaseQueijo);
+        const conditionalFrequencies = conditionalTransactions.reduce((acc, transaction) => {
+            transaction.forEach((item) => {
+                acc[item] = (acc[item] || 0) + 1;
+            });
+            return acc;
+        }, {});
+
+        const conditionalComputed = buildTreeProgressionWithFrequencies(
+            conditionalTransactions,
+            conditionalFrequencies
+        );
+        const conditionalTreeQueijo = conditionalComputed.treeData;
+        const conditionalTreeProgression = conditionalComputed.treeProgression;
 
         function drawTree(svgId, data, width = 500, height = 400, highlightedNodes = []) {
             d3.select(`#${svgId}`).selectAll("*").remove();
@@ -1715,6 +1362,78 @@
             updatePasso2Display();
         }
 
+        function updatePasso4Display() {
+            const total = conditionalTransactions.length;
+
+            if (currentConditionalStep === 0) {
+                document.getElementById('conditional-current').textContent = 'Mini-árvore vazia — pronto para inserir caminhos...';
+                document.getElementById('conditional-original').innerHTML = 'Vazio';
+                document.getElementById('conditional-ordered').innerHTML = 'Vazio';
+                document.getElementById('conditional-steps').innerHTML =
+                    '<div class="info-box success"><strong>ℹ️ Base condicional:</strong> Cada caminho veio do Passo 3 (Queijo) e sera inserido na mini-arvore.</div>';
+                document.getElementById('conditional-counter').textContent = `Caminho 0/${total}`;
+                drawTree('tree-passo4-step', { name: "", value: 0, children: [] }, 450, 400, []);
+                return;
+            }
+
+            const idx = currentConditionalStep - 1;
+            const original = conditionalTransactions[idx];
+            const ordered = sortByMap(
+                original.filter((item) => (conditionalFrequencies[item] || 0) >= minSupportCount),
+                conditionalFrequencies
+            );
+
+            document.getElementById('conditional-current').textContent =
+                `Caminho ${idx + 1}: Inserindo [${original.join(', ')}]`;
+
+            document.getElementById('conditional-original').innerHTML =
+                original.map((item) =>
+                    `<span class="item-badge" title="Frequência na base: ${conditionalFrequencies[item] || 0}/${total}">${item}</span>`
+                ).join('');
+
+            document.getElementById('conditional-ordered').innerHTML =
+                ordered.map((item) =>
+                    `<span class="item-badge" style="background: linear-gradient(90deg, #51cf66 0%, #667eea 100%); position: relative;" title="Frequência na base: ${conditionalFrequencies[item] || 0}/${total}">${item} <span style="font-weight: bold; color: #ffd43b;">(${conditionalFrequencies[item] || 0})</span></span>`
+                ).join('');
+
+            let stepsHTML = '<div class="info-box success"><strong>📊 Inserção na mini-árvore:</strong><br>';
+            stepsHTML += `<br>🔢 <strong>Frequências na base (Queijo):</strong><br>`;
+            stepsHTML += Object.entries(conditionalFrequencies).map(([item, freq]) =>
+                `&nbsp;&nbsp;• ${item}: ${freq}/${total} caminhos`
+            ).join('<br>');
+            stepsHTML += `<br><br>📝 <strong>Passo a passo:</strong><br>`;
+            stepsHTML += `1️⃣ Pegar caminho da base: [${original.join(', ')}]<br>`;
+            stepsHTML += `2️⃣ Ordenar por frequência na base: [${ordered.join(', ')}]<br>`;
+            stepsHTML += `3️⃣ Inserir na mini-árvore compartilhando prefixos`;
+            stepsHTML += '</div>';
+            document.getElementById('conditional-steps').innerHTML = stepsHTML;
+
+            document.getElementById('conditional-counter').textContent = `Caminho ${idx + 1}/${total} inserido`;
+
+            const currentTree = conditionalTreeProgression[idx];
+            const highlighted = conditionalTreeProgression[idx].newNodes || [];
+            drawTree('tree-passo4-step', currentTree, 450, 400, highlighted);
+        }
+
+        function nextConditional() {
+            if (currentConditionalStep < conditionalTransactions.length) {
+                currentConditionalStep += 1;
+                updatePasso4Display();
+            }
+        }
+
+        function prevConditional() {
+            if (currentConditionalStep > 0) {
+                currentConditionalStep -= 1;
+                updatePasso4Display();
+            }
+        }
+
+        function resetConditional() {
+            currentConditionalStep = 0;
+            updatePasso4Display();
+        }
+
         function showConditionalPattern(itemName) {
             const patterns = {
                 "Pão": `<strong>Base de Padrões Condicionais para Pão:</strong><br><br>
@@ -1747,14 +1466,8 @@
                     <span class="highlight-yellow">Padrões gerados: {Leite, Queijo}, {Pão, Queijo}, {Manteiga, Queijo}, {Pão, Leite, Queijo}</span>`,
                 
                 "Ovos": `<strong>Base de Padrões Condicionais para Ovos:</strong><br><br>
-                    Caminhos até raiz:<br>
-                    • Pão:7, Leite:5, Manteiga:3 (em Pão→Leite→Manteiga→Ovos)<br>
-                    • Pão:7 (em Pão→Ovos)<br>
-                    • Pão:7, Leite:5, Queijo:2 (em Pão→Leite→Queijo→Ovos)<br>
-                    • Pão:7, Leite:5, Manteiga:3, Queijo:1 (em Pão→Leite→Manteiga→Queijo→Ovos)<br>
-                    • Leite:2, Manteiga:1, Queijo:1 (em Leite→Manteiga→Queijo→Ovos)<br><br>
-                    Agregado: Pão: 4, Leite: 4, Manteiga: 3, Queijo: 3<br>
-                    <span class="highlight-yellow">Padrões gerados: {Pão, Ovos}, {Leite, Ovos}, {Manteiga, Ovos}, {Queijo, Ovos}, {Pão, Leite, Ovos}</span>`
+                    Ovos apareceu em apenas 2/10 transações e foi <strong>descartado no Passo 1</strong>.<br>
+                    Por isso, <strong>não entra na FP-Tree</strong> e não possui base condicional.`
             };
             document.getElementById('passo3-result').innerHTML = 
                 `<div class="info-box">${patterns[itemName] || 'Selecione um item válido'}</div>`;
@@ -1779,6 +1492,13 @@
                 }, 100);
             } else if (tabName === 'passo3') {
                 setTimeout(() => drawTree('tree-passo3', treeData, 500, 400), 100);
+            } else if (tabName === 'passo4') {
+                setTimeout(() => {
+                    updatePasso4Display();
+                    drawTree('tree-passo4', conditionalTreeQueijo, 500, 400);
+                }, 100);
+            } else if (tabName === 'passo5') {
+                setTimeout(() => drawTree('tree-passo5', conditionalTreeQueijo, 500, 400), 100);
             }
         }
 
@@ -1795,6 +1515,7 @@
         function resetVisualization() {
             currentStep = 0;
             currentTransactionStep = 0;
+            currentConditionalStep = 0;
             switchTab('passo1');
         }
 
